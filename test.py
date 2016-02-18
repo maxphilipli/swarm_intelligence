@@ -13,7 +13,7 @@ class DrawCircles(QWidget):
         # optional
         paint.setRenderHint(QPainter.Antialiasing)
         # make a white drawing background
-        paint.setBrush(Qt.black)
+        paint.setBrush(Qt.red)
         paint.drawRect(event.rect())
         # for circle make the ellipse radii match
         radx = 100

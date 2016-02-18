@@ -1,4 +1,4 @@
 # swarm_intelligence
-*Simulation of swarm intelligence 
+Simulation of swarm intelligence 
 
-*Designing simulation graphics environment using PyQt4
+Designing simulation graphics environment using PyQt4

@@ -3,6 +3,7 @@ from PyQt4.QtGui import *
 import sys
 
 class DrawCircles(QWidget):
+    center = QPoint(225, 125)
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         # setGeometry(x_pos, y_pos, width, height)
@@ -21,14 +22,19 @@ class DrawCircles(QWidget):
         rady = 20
         # draw red circles
         paint.setPen(Qt.black)
-        center = QPoint(225, 125)
+        # center = QPoint(225, 125)
+        placeholder = self.center
             # optionally fill each circle yellow
         paint.setBrush(Qt.green)
-        paint.drawEllipse(center, radx, rady)
+        paint.drawEllipse(placeholder, radx, rady)
         # paint.drawRect(10,10,20,20)
         paint.end()
     def mousePressEvent(self, QMouseEvent):
-        print(QMouseEvent.pos())
+        tempCenter = str(QMouseEvent.pos())
+        self.center = tempCenter[13:]
+        update()
+
+
 
 
 if __name__=="__main__":

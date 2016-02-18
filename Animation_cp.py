@@ -6,7 +6,7 @@ class DrawCircles(QWidget):
     def __init__(self, parent=None):
         QWidget.__init__(self, parent)
         # setGeometry(x_pos, y_pos, width, height)
-        self.setGeometry(0, 0, 650, 550)
+        self.setGeometry(300, 300, 350, 350)
         self.setWindowTitle('Draw circles')
     def paintEvent(self, event):
         paint = QPainter()
@@ -25,12 +25,10 @@ class DrawCircles(QWidget):
         center = QPoint(xpos, 125)
             # optionally fill each circle yellow
         paint.setBrush(Qt.green)
+        
         paint.drawEllipse(center, radx, rady)
         # paint.drawRect(10,10,20,20)
         paint.end()
-    def mousePressEvent(self, QMouseEvent):
-        print(QMouseEvent.pos())
-
 
 if __name__=="__main__":
     global xpos

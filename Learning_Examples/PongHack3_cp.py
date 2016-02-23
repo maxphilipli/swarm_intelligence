@@ -65,6 +65,9 @@ class Paddle(QGraphicsRectItem):
         if self.y()<self.maxHeight:
             self.setY(self.y()+10)
 
+        if self.x()<300:
+            self.setX(self.x()+10)
+
     def moveLeft(self):
         #print self.y(),self.maxHeight
         if self.x()>0:

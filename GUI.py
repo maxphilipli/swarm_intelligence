@@ -20,7 +20,7 @@ class Window(QtGui.QMainWindow):
 	#define what to do on initialization
 	def __init__(self):
 		super(Window, self).__init__()
-		self.setGeometry(0, 0, 600, 600)
+		self.setGeometry(0, 0, 500, 500)
 		self.setWindowTitle("Final Form")
 		self.timer = QtCore.QTimer()
 		self.timer.timeout.connect(self.update)

@@ -5,26 +5,19 @@ from PyQt4.QtGui import *
 import time
 
 
-centerX = 20
-centerY = 20
-centerX2 = 400
-centerY2 = 50 
-
-class Swarm():
-
-	def __init__(self):
-		print ("Created this")
-
-	def velocity(self):
-		global centerX 
-		centerX+=(1/10)
-		global centerY 
-		centerY+=0
-
+#-----------------------------------------------------------#
+#GUI class definition
 class Window(QtGui.QMainWindow):
 
-	test = Swarm()
+	#---------------------------------------------#
+	#define class variables
+	msPtX = 20
+	msPtY = 20
+	centerX = 20
+	centerY = 20
 
+	#---------------------------------------------#
+	#define what to do on initialization
 	def __init__(self):
 		super(Window, self).__init__()
 		self.setGeometry(0, 0, 600, 600)
@@ -34,42 +27,60 @@ class Window(QtGui.QMainWindow):
 		self.timer.start(20)
 		self.show()
 
+	#---------------------------------------------#
+	#grab coordinates of mouse click
+	def mousePressEvent(self, QMouseEvent):
+		mousePoint = (str(QMouseEvent.pos())[20:])
+		mousePoint = mousePoint.rsplit(", ")
+		msPtX = mousePoint[0]
+		noEndP = mousePoint[1].rsplit(")")
+		msPtY = noEndP[0]
+		self.msPtX = int(msPtX)
+		self.msPtY = int(msPtY)
+
+	#---------------------------------------------#
+	#movement to mouse coordinates after mouse click
+	def moveToMouse(self):
+		if self.msPtX > self.centerX:
+			self.centerX += 3
+		if self.msPtY > self.centerY:
+			self.centerY += 3
+		if self.msPtX < self.centerX:
+			self.centerX -= 3
+		if self.msPtY < self.centerY:
+			self.centerY -= 3		
+
+	#---------------------------------------------#
+	#paint event being looped to simulate animation
 	def paintEvent(self, event):
 		paint = QPainter()
 		paint.begin(self)
 		paint.setRenderHint(QPainter.Antialiasing)
-
 		#set background
 		paint.setBrush(Qt.white)
 		paint.drawRect(event.rect())
-
 		#set circle
 		paint.setPen(Qt.black)
 		paint.setBrush(Qt.green)
-
-		#circle radius
-		rad = 15
-		global centerX
-		global centerY
 		#draw circle
-		center = QPoint(centerX, centerY)
-
+		rad = 15
+		center = QPoint(self.centerX, self.centerY)
 		paint.drawEllipse(center, rad, rad)
 
-		# #add a new circle
-		# center2 = QPoint(self.centerX2, self.centerY2)
-		# paint.drawEllipse(center2, rad, rad)
+		self.moveToMouse()
 
-		#move the circle every update
-		self.test.velocity()
 		paint.end()
 
 
+
+
+#-----------------------------------------------------------#
 def run():
 	app = QtGui.QApplication(sys.argv)
 	GUI = Window()
 	sys.exit(app.exec_())
 
 
+#-----------------------------------------------------------#
 if __name__ == "__main__":
 	run()

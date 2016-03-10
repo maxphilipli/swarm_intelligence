@@ -43,16 +43,10 @@ if __name__=="__main__":
 	print("theta = ", a.theta)
 	print("sight = ", round(a.sight))
 
-	a.calcVelocity()
-	a.calcPos()
-
-	print("xpos = ", a.xPos)
-	print("ypos = ", a.yPos)
-	print("vel = ", a.velocity)
-
-	a.calcVelocity()
-	a.calcPos()
-
-	print("xpos = ", a.xPos)
-	print("ypos = ", a.yPos)
-	print("vel = ", a.velocity)
+	for  i in range(0, 10):
+		a.calcVelocity()
+		a.calcPos()
+		
+		print("xpos = ", a.xPos)
+		print("ypos = ", a.yPos)
+		print("vel = ", a.velocity)

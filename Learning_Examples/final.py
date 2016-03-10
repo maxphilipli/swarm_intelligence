@@ -17,9 +17,9 @@ class Swarm():
 
 	def velocity(self):
 		global centerX 
-		centerX+=2
+		centerX+=(1/10)
 		global centerY 
-		centerY+=2
+		centerY+=0
 
 class Window(QtGui.QMainWindow):
 

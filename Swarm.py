@@ -9,6 +9,8 @@ class Swarm():
 		self.numberBots = numberBots
 		self.startSize = startSize
 		self.botList = []
+		self.swarmCenterX = 200
+		self.swarmCenterY = 200
 
 		for i in range(0,numberBots):
 			# create random position of bot within defined radius
@@ -16,8 +18,8 @@ class Swarm():
 			thetaSwarm = random.uniform(0, 2*math.pi)
 
 			# define Bot initial variables
-			xPosBot = radiusSwarm * math.cos(thetaSwarm)
-			yPosBot = radiusSwarm * math.sin(thetaSwarm)
+			xPosBot = self.swarmCenterX + radiusSwarm * math.cos(thetaSwarm)
+			yPosBot = self.swarmCenterY + radiusSwarm * math.sin(thetaSwarm)
 			thetaBot = 0
 			velocityBot = 0
 

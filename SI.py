@@ -44,7 +44,7 @@ class Window(QtGui.QMainWindow):
 	#movement to mouse coordinates after mouse click
 	def moveToMouse(self):
 		for element in self.swarm.botList:
-			element.move(self.msPtX, self.msPtY)
+			element.move(self.msPtX, self.msPtY, self.swarm.botList)
 
 
 	#---------------------------------------------#

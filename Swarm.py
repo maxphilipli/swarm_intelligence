@@ -25,15 +25,14 @@ class Swarm():
 				# create random position of bot within defined radius
 				radiusSwarm = random.uniform(0, self.startSize)
 				thetaSwarm = random.uniform(0, 2*math.pi)
-				# print('number of bots: ',i)
-
+				
 				# define Bot initial variables
 				xPosBot = self.swarmCenterX + radiusSwarm * math.cos(thetaSwarm)
 				yPosBot = self.swarmCenterY + radiusSwarm * math.sin(thetaSwarm)
 
 				if i > 0:
 					for element in self.botList:
-						dist = self.distance(xPosBot,yPosBot, element.xPos, element.yPos)
+						dist = element.distance(xPosBot,yPosBot, element.xPos, element.yPos)
 						if dist > 2*self.sizeBot:
 							overlap = False
 						else:
@@ -51,11 +50,6 @@ class Swarm():
 			newBot = Bot.Bot(xPosBot,yPosBot, velocityBot, thetaBot, self.sizeBot)
 			self.botList.append(newBot)
 			# print('made many bots',i)
-
-
-	def distance(self, x, y, x2, y2):
-		return math.sqrt((x-x2)*(x-x2) + (y-y2)*(y-y2))
-
 
 
 

@@ -3,12 +3,12 @@ import math
 
 class Bot():
 
-	def __init__(self, xPos, yPos, velocity, theta):
+	def __init__(self, xPos, yPos, velocity, theta, size):
 		self.xPos = xPos
 		self.yPos = yPos
 		self.velocity = velocity
 		self.theta = theta
-		self.size = 5
+		self.size = size
 		self.sight = 10
 
 	

@@ -17,12 +17,12 @@ class Window(QtGui.QMainWindow):
 	msPtX = 20
 	msPtY = 20
 
-	swarm = Swarm.Swarm(100, 20)
+	swarm = Swarm.Swarm(100, 50)
 	#---------------------------------------------#
 	#define what to do on initialization
 	def __init__(self):
 		super(Window, self).__init__()
-		self.setGeometry(0, 0, 500, 500)
+		self.setGeometry(200, 200, 500, 500)
 		self.setWindowTitle("Final Form")
 		self.timer = QtCore.QTimer()
 		self.timer.timeout.connect(self.update)

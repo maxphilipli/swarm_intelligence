@@ -26,7 +26,7 @@ class Window(QtGui.QMainWindow):
 		self.setWindowTitle("Final Form")
 		self.timer = QtCore.QTimer()
 		self.timer.timeout.connect(self.update)
-		self.timer.start(20)
+		self.timer.start(2)
 		self.show()
 
 	#---------------------------------------------#
@@ -43,6 +43,7 @@ class Window(QtGui.QMainWindow):
 	#---------------------------------------------#
 	#movement to mouse coordinates after mouse click
 	def moveToMouse(self):
+		self.swarm.updateBotList(self.msPtX, self.msPtY)
 		for element in self.swarm.botList:
 			element.move(self.msPtX, self.msPtY, self.swarm.botList)
 

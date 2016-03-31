@@ -51,28 +51,13 @@ class Swarm():
 			self.botList.append(newBot)
 			# print('made many bots',i)
 
+	def updateBotList(self, targX, targY):
+		for element in self.botList:
+			element.distToTargFunc(targX, targY)
+		self.botList = sorted(self.botList, key=lambda bot: bot.distToTarg)
+
 
 
 
 if __name__=="__main__":
 	print("its alive")
-	# a = Bot(0,0,0,math.pi/4)
-
-	# print("xpos = ", a.xPos)
-	# print("ypos = ", a.yPos)
-	# print("theta = ", a.theta)
-	# print("sight = ", round(a.sight))
-
-	# a.calcVelocity()
-	# a.calcPos()
-
-	# print("xpos = ", a.xPos)
-	# print("ypos = ", a.yPos)
-	# print("vel = ", a.velocity)
-
-	# a.calcVelocity()
-	# a.calcPos()
-
-	# print("xpos = ", a.xPos)
-	# print("ypos = ", a.yPos)
-	# print("vel = ", a.velocity)

@@ -9,9 +9,11 @@ class Swarm():
 		self.numberBots = numberBots
 		self.startSize = startSize
 		self.botList = []
-		self.swarmCenterX = 200
-		self.swarmCenterY = 200
+		self.swarmStartX = 200
+		self.swarmStartY = 200
 		self.sizeBot = 3
+		self.swarmCenterX = 0
+		self.swarmCenterY = 0
 
 		for i in range(0,numberBots):
 			overlap = True
@@ -27,8 +29,8 @@ class Swarm():
 				thetaSwarm = random.uniform(0, 2*math.pi)
 				
 				# define Bot initial variables
-				xPosBot = self.swarmCenterX + radiusSwarm * math.cos(thetaSwarm)
-				yPosBot = self.swarmCenterY + radiusSwarm * math.sin(thetaSwarm)
+				xPosBot = self.swarmStartX + radiusSwarm * math.cos(thetaSwarm)
+				yPosBot = self.swarmStartY + radiusSwarm * math.sin(thetaSwarm)
 
 				if i > 0:
 					for element in self.botList:
@@ -55,6 +57,20 @@ class Swarm():
 		for element in self.botList:
 			element.distToTargFunc(targX, targY)
 		self.botList = sorted(self.botList, key=lambda bot: bot.distToTarg)
+
+	def findCenter(self):
+		self.swarmCenterX = 0
+		self.swarmCenterY = 0
+		for element in self.botList:
+			self.swarmCenterX += element.xPos
+			self.swarmCenterY += element.yPos
+
+		self.swarmCenterX /= self.numberBots
+		self.swarmCenterY /= self.numberBots
+
+
+
+
 
 
 

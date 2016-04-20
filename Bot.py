@@ -4,6 +4,7 @@ import Obstacle
 
 class Bot():
 
+
 	def __init__(self, xPos, yPos, velocity, theta, size):
 		self.xPos = xPos
 		self.yPos = yPos
@@ -28,9 +29,9 @@ class Bot():
 	def distance(self, x, y, x2, y2):
 		return math.sqrt((x-x2)*(x-x2) + (y-y2)*(y-y2))
 
-	def calcVelocity(self, x, y, bList, obsList):
+	def calcVelocity(self, x, y, swarm, obsList):
 		# Calculates the velocity for the bot
-		factor = .05
+		factor = .1
 		dist = self.distance(self.xPos, self.yPos, x, y)
 		self.velocity = factor * dist
 		if self.velocity >= 8:
@@ -43,23 +44,30 @@ class Bot():
 		targDX = ((x - self.xPos)/dist) * targWeight
 		targDY = ((y - self.yPos)/dist) * targWeight
 
-		for element in bList:
+		for element in swarm.botList:
 			bDist = self.distance(self.xPos, self.yPos, element.xPos, element.yPos)
 			dmax = 250
 			dmin = 20
 			botWeight = -1/(dmax - dmin) * bDist + dmax/(dmax - dmin)
 			if botWeight > 1:
 				botWeight = 1
-			elif botWeight < 0:
-				botWeight = 0
+			# elif botWeight < 0:
+			# 	botWeight = 0
 			if bDist != 0:
 				pass
 				targDX += -((element.xPos - self.xPos)/bDist)*botWeight
 				targDY += -((element.yPos - self.yPos)/bDist)*botWeight
 
 
+		personalObsList = obsList[:]
 
-		for obs in obsList:
+		self.imaginaryObstacle(swarm, x, y)
+
+		if self.obs != None:
+			personalObsList.append(self.obs)
+
+
+		for obs in personalObsList:
 
 			obsDist = self.distance(self.xPos, self.yPos, obs.xPos, obs.yPos)
 			multFactor = 5000
@@ -71,10 +79,6 @@ class Bot():
 				self.randVar = 0
 			else:
 				self.randVar = 1
-
-
-
-
 
 			if self.randVar < 0.5:
 				obsDX2 = obsDY1
@@ -94,13 +98,6 @@ class Bot():
 
 		self.theta = math.atan2(targDY, targDX) + random.gauss(0, math.pi/6)
 
-	def move(self, x, y, bList, obsList):
-		# Function to simply movement function call in GUI
-		self.calcVelocity(x, y, bList, obsList)
-		self.calcPos()
-		if self.collisionChecker(bList, obsList):
-			self.xPos = self.newX
-			self.yPos = self.newY
 
 	def collisionChecker(self, bList, obsList):
 		for element in bList + obsList:
@@ -116,8 +113,23 @@ class Bot():
 
 
 
+##---------------------------------------------------------------##
+	def move(self, x, y, swarm, obsList):
+		# Function to simply movement function call in GUI
+		self.calcVelocity(x, y, swarm, obsList)
+		self.calcPos()
+		if self.collisionChecker(swarm.botList, obsList):
+			self.xPos = self.newX
+			self.yPos = self.newY
+		# self.xPos = self.newX
+		# self.yPos = self.newY
 
-
+	def imaginaryObstacle(self, swarm, x, y):
+		centToTarg = self.distance(swarm.swarmCenterX, swarm.swarmCenterY, x, y)
+		if centToTarg < 100:
+			self.obs = Obstacle.Obstacle(centToTarg, swarm.swarmCenterX, swarm.swarmCenterY)
+		else:
+			self.obs = None
 
 
 

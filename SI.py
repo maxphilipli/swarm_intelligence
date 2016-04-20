@@ -21,7 +21,7 @@ class Window(QtGui.QMainWindow):
 
 	swarm = Swarm.Swarm(100, 50)
 
-	# obs = Obstacle.Obstacle(75, 500, 300)
+	obs = Obstacle.Obstacle(40, 500, 300)
 	# obs2 = Obstacle.Obstacle(40, 100, 450)
 	# obs3 = Obstacle.Obstacle(40, 300, 450)
 	# obs4 = Obstacle.Obstacle(40, 500, 450)
@@ -30,12 +30,14 @@ class Window(QtGui.QMainWindow):
 	# obs7 = Obstacle.Obstacle(40, 500, 250)
 	# obsList = [obs, obs2, obs3, obs4, obs5, obs6, obs7]
 	obsList = []
-	for i in range(0,100):
-		x = random.uniform(50, 950)
-		y = random.uniform(50, 950)
-		obsList.append(Obstacle.Obstacle(20,x,y))
-
-
+	# for i in range(0,10):
+	# 	x = random.uniform(50, 950)
+	# 	y = random.uniform(50, 950)
+	# 	obsList.append(Obstacle.Obstacle(20,x,y))
+	factor = 125
+	for i in range(1, 3):
+		for j in range (1, 3):
+			obsList.append(Obstacle.Obstacle(40, i * factor, j * factor))
 
 
 	#---------------------------------------------#
@@ -64,8 +66,9 @@ class Window(QtGui.QMainWindow):
 	#movement to mouse coordinates after mouse click
 	def moveToMouse(self):
 		self.swarm.updateBotList(self.msPtX, self.msPtY)
+		self.swarm.findCenter()
 		for element in self.swarm.botList:
-			element.move(self.msPtX, self.msPtY, self.swarm.botList, self.obsList)
+			element.move(self.msPtX, self.msPtY, self.swarm, self.obsList)
 
 
 	#---------------------------------------------#
